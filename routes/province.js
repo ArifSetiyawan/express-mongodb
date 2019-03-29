@@ -7,9 +7,9 @@ module.exports = (app) => {
     // Retrieve all province
     app.get('/provinces', provinces.findAll);
 
-    // Update a Note with provinceId
+    // Update a province with provinceId
     app.put('/province/:provinceId', provinces.update);
 
-    // Delete a Note with provinceId
+    // Delete a province with provinceId
     app.delete('/province/:provinceId', provinces.delete);
 }

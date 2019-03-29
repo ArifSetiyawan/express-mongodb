@@ -46,7 +46,7 @@ exports.update = (req, res) => {
     }
 
     // Find and update Province with the request body
-    Province.findByIdAndUpdate(req.params.provinceId, {
+    Province.findOneAndUpdate(req.params.provinceId, {
         province_name: req.body.province_name
     }, {new: true})
     .then(province => {
@@ -55,7 +55,7 @@ exports.update = (req, res) => {
                 message: "Province not found with id " + req.params.provinceId
             });
         }
-        res.send(Province);
+        res.send(province);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
@@ -70,7 +70,7 @@ exports.update = (req, res) => {
 
 // Delete a Province with the specified ProvinceId in the request
 exports.delete = (req, res) => {
-    Province.findByIdAndRemove(req.params.provinceId)
+    Province.findOneAndRemove(req.params.provinceId)
     .then(province => {
         if(!province) {
             return res.status(404).send({

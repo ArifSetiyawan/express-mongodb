@@ -47,7 +47,7 @@ exports.update = (req, res) => {
     }
 
     // Find and update Contraception with the request body
-    Contraception.findByIdAndUpdate(req.params.contraceptionId, {
+    Contraception.findOneAndUpdate(req.params.contraceptionId, {
         name: req.body.name
     }, {new: true})
     .then(contraception => {
@@ -71,7 +71,7 @@ exports.update = (req, res) => {
 
 // Delete a contraception with the specified contraceptionId in the request
 exports.delete = (req, res) => {
-    Contraception.findByIdAndRemove(req.params.contraceptionId)
+    Contraception.findOneAndRemove(req.params.contraceptionId)
     .then(contraception => {
         if(!contraception) {
             return res.status(404).send({

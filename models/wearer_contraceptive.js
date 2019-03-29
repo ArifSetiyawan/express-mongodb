@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const WearerSchema = mongoose.Schema({
     province: [{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref : 'province'
     }],
     contraception: [{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref : 'contraception'
     }],
     number_of_users: Number

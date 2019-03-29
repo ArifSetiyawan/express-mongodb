@@ -14,6 +14,7 @@ const mongoose = require('mongoose');
 //Add route file here
 require('./routes/contraception')(app);
 require('./routes/province')(app);
+require('./routes/wearer_contraception')(app);
 
 mongoose.Promise = global.Promise;
 
