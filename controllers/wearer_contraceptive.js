@@ -30,7 +30,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
     Wearer.find()
     .populate('province', 'province_name')
-    .populate('contraception', 'name')
+    .populate('contraception', 'contraception_name')
     .then(wearers => {
         res.send(wearers);
     }).catch(err => {

@@ -8,10 +8,9 @@ exports.create = (req, res) => {
             message: "Contraception content can not be empty"
         });
     }
-    console.log(req.body.name)
     // Create a Contraception
     const contraception = new Contraception({
-        name: req.body.name
+        contraception_name: req.body.contraception_name
     });
 
     // Save Contraception in the database
@@ -48,7 +47,7 @@ exports.update = (req, res) => {
 
     // Find and update Contraception with the request body
     Contraception.findOneAndUpdate(req.params.contraceptionId, {
-        name: req.body.name
+        contraception_name: req.body.contraception_name
     }, {new: true})
     .then(contraception => {
         if(!contraception) {
@@ -80,7 +79,7 @@ exports.delete = (req, res) => {
         }
         res.send({message: "Contraception deleted successfully!"});
     }).catch(err => {
-        if(err.kind === 'ObjectId' || err.name === 'NotFound') {
+        if(err.kind === 'ObjectId' || err.contraception_name === 'NotFound') {
             return res.status(404).send({
                 message: "Contraception not found with id " + req.params.contraceptionId
             });                

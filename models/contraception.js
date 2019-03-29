@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
 const contraceptionSchema = new Schema({
-  name: {
+  contraception_name: {
     type: String
   },
 },{
