@@ -6,10 +6,14 @@ const app = express();
 // parse requests
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
 // Configuring the database
 const config = require('./config/config');
 const mongoose = require('mongoose');
-require('./routes/contraception')(app);  //Add route file here
+
+//Add route file here
+require('./routes/contraception')(app);
+require('./routes/province')(app);
 
 mongoose.Promise = global.Promise;
 

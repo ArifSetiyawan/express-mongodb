@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 
-const ProvinceSchema = mongoose.Schema({
-    province_name: String,
-}, {
+const provinceSchema = new Schema({
+  province_name: {
+    type: String
+  },
+},{
     timestamps: true
-});
+})
 
-module.exports = mongoose.model('province', ProvinceSchema);
+const Province = mongoose.model('province', provinceSchema)
+
+module.exports = Province;

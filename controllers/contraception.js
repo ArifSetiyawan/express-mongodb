@@ -48,7 +48,7 @@ exports.update = (req, res) => {
 
     // Find and update Contraception with the request body
     Contraception.findByIdAndUpdate(req.params.contraceptionId, {
-        contraception_name: req.body.contraception_name || "No contraception"
+        name: req.body.name
     }, {new: true})
     .then(contraception => {
         if(!contraception) {
