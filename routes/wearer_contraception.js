@@ -7,9 +7,12 @@ module.exports = (app) => {
     // Retrieve all wearer
     app.get('/wearers', wearers.findAll);
 
+    // Retrieve a single wearer with wearerId
+    app.get('/wearer/:wearerId', wearers.findOne);
+
     // Update a wearer with wearerId
-    app.put('/wearer/:wearerId', wearers.update);
+    app.put('/wearer/update/:wearerId', wearers.update);
 
     // Delete a wearer with wearerId
-    app.delete('/wearer/:wearerId', wearers.delete);
+    app.delete('/wearer/delete/:wearerId', wearers.delete);
 }

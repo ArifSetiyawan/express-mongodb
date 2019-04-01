@@ -36,6 +36,28 @@ exports.findAll = (req, res) => {
     });
 };
 
+// Find a single province with a provinceId
+exports.findOne = (req, res) => {
+    Province.findById(req.params.provinceId)
+    .then(province => {
+        if(!province) {
+            return res.status(404).send({
+                message: "province not found with id " + req.params.provinceId
+            });            
+        }
+        res.send(province);
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "province not found with id " + req.params.provinceId
+            });                
+        }
+        return res.status(500).send({
+            message: "Something wrong retrieving province with id " + req.params.provinceId
+        });
+    });
+};
+
 // Update a Province
 exports.update = (req, res) => {
     // Validate Request
@@ -46,7 +68,7 @@ exports.update = (req, res) => {
     }
 
     // Find and update Province with the request body
-    Province.findOneAndUpdate(req.params.provinceId, {
+    Province.findByIdAndUpdate(req.params.provinceId, {
         province_name: req.body.province_name
     }, {new: true})
     .then(province => {
@@ -70,16 +92,16 @@ exports.update = (req, res) => {
 
 // Delete a Province with the specified ProvinceId in the request
 exports.delete = (req, res) => {
-    Province.findOneAndRemove(req.params.provinceId)
-    .then(province => {
-        if(!province) {
+    Province.findByIdAndRemove(req.params.provinceId)
+    .then(pro => {
+        if(!pro) {
             return res.status(404).send({
                 message: "Province not found with id " + req.params.provinceId
             });
         }
         res.send({message: "Province deleted successfully!"});
     }).catch(err => {
-        if(err.kind === 'ObjectId' || err.name === 'NotFound') {
+        if(err.kind === 'ObjectId' || err.province_name === 'NotFound') {
             return res.status(404).send({
                 message: "Province not found with id " + req.params.provinceId
             });                

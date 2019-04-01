@@ -7,9 +7,12 @@ module.exports = (app) => {
     // Retrieve all province
     app.get('/provinces', provinces.findAll);
 
+    // Retrieve a single province with provinceId
+    app.get('/province/:provinceId', provinces.findOne);
+
     // Update a province with provinceId
-    app.put('/province/:provinceId', provinces.update);
+    app.put('/province/update/:provinceId', provinces.update);
 
     // Delete a province with provinceId
-    app.delete('/province/:provinceId', provinces.delete);
+    app.delete('/province/delete/:provinceId', provinces.delete);
 }

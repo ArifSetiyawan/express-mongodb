@@ -36,6 +36,28 @@ exports.findAll = (req, res) => {
     });
 };
 
+// Find a single contraception with a contraceptionId
+exports.findOne = (req, res) => {
+    Contraception.findById(req.params.contraceptionId)
+    .then(contraception => {
+        if(!contraception) {
+            return res.status(404).send({
+                message: "contraception not found with id " + req.params.contraceptionId
+            });            
+        }
+        res.send(contraception);
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "contraception not found with id " + req.params.contraceptionId
+            });                
+        }
+        return res.status(500).send({
+            message: "Something wrong retrieving contraception with id " + req.params.contraceptionId
+        });
+    });
+};
+
 // Update a Contraception
 exports.update = (req, res) => {
     // Validate Request
@@ -46,16 +68,16 @@ exports.update = (req, res) => {
     }
 
     // Find and update Contraception with the request body
-    Contraception.findOneAndUpdate(req.params.contraceptionId, {
+    Contraception.findByIdAndUpdate(req.params.contraceptionId, {
         contraception_name: req.body.contraception_name
     }, {new: true})
-    .then(contraception => {
-        if(!contraception) {
+    .then(contra => {
+        if(!contra) {
             return res.status(404).send({
                 message: "Contraception not found with id " + req.params.contraceptionId
             });
         }
-        res.send(contraception);
+        res.send(contra);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
@@ -70,9 +92,9 @@ exports.update = (req, res) => {
 
 // Delete a contraception with the specified contraceptionId in the request
 exports.delete = (req, res) => {
-    Contraception.findOneAndRemove(req.params.contraceptionId)
-    .then(contraception => {
-        if(!contraception) {
+    Contraception.findByIdAndRemove(req.params.contraceptionId)
+    .then(contracep => {
+        if(!contracep) {
             return res.status(404).send({
                 message: "Contraception not found with id " + req.params.contraceptionId
             });

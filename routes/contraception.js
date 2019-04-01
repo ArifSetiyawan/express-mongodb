@@ -7,9 +7,12 @@ module.exports = (app) => {
     // Retrieve all contraceptions
     app.get('/contraceptions', contraceptions.findAll);
 
+    // Retrieve a single contraception with contraceptionId
+    app.get('/contraception/:contraceptionId', contraceptions.findOne);
+
     // Update a Note with contraceptionId
-    app.put('/contraception/:contraceptionId', contraceptions.update);
+    app.put('/contraception/update/:contraceptionId', contraceptions.update);
 
     // Delete a Note with contraceptionId
-    app.delete('/contraception/:contraceptionId', contraceptions.delete);
+    app.delete('/contraception/delete/:contraceptionId', contraceptions.delete);
 }
